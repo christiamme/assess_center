@@ -1,0 +1,92 @@
+.fd_dropZone {
+    position:absolute;
+    top:0px;
+    border: 2px dashed rgba(0,0,0,.3);
+    border-radius: 20px;
+    font-family: Arial;
+    text-align: center;
+    position: relative;
+    font-size: 20px;
+    color: rgba(0,0,0,.3);
+}
+
+    .fd_dropZone input {
+        /*Important*/
+        position: absolute;
+        /*Important*/
+        cursor: pointer;
+        left: 0px;
+        top: 0px;
+        opacity:0;
+    }
+
+	.fd_dropZone input:disabled{
+        opacity:0;
+    }
+	
+	.fd_dropZone img{
+		float: left;
+		max-height: 120px;
+		max-width: 100px;
+		margin-top: 4px;
+		margin-left: 15px;
+	}
+	
+    /*Important*/
+    .fd_dropZone.fd_mouse-over {
+        border: 2px dashed rgba(0,0,0,.5);
+        color: rgba(0,0,0,.5);
+    }
+
+	.fd_dropZone .form-control-feedback{
+		left: 100px;
+	}
+
+/*If you dont want the button*/
+.fd_clickHere {
+    position: absolute;
+    cursor: pointer;
+    left: 50%;
+    top: 50%;
+    margin-left: -50px;
+    line-height: 26px;
+    color: white;
+    font-size: 12px;
+    width: 100px;
+    height: 26px;
+    border-radius: 4px;
+    background-color: #3b85c3;
+
+}
+
+    .fd_clickHere:hover {
+        background-color: #4499DD;
+    }
+	
+.fd_filename {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 1.5em;
+}
+.fd_file-preview {
+    background:#ccc;
+    border:5px solid #fff;
+    box-shadow:0 0 4px rgba(0, 0, 0, 0.5);
+    display:inline-block;
+    width:60px;
+    height:60px;
+    text-align:center;
+    font-size: 14px;
+    margin-top:5px;
+}
+
+.fd_closeBtn {
+    float: right;
+	margin-top: 10px;
+	margin-right: 10px;
+}
+
+	.fd_closeBtn:hover {
+		color:red;
+	}

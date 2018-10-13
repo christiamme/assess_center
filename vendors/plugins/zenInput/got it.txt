@@ -1,0 +1,13 @@
+http://plugindetector.com/zeninput
+https://zenmoney.ru/demos/demo2.html
+
+le cambié la coma por un punto para decimales,
+
+y le cambié la linea donde ejecuta la funcion personalizada OnFocus, antes de lo default.
+por que para que funcionara con AutoNumeric, primero tenía que quitarle el autonumeric, y luego que hiciera sus calculos
+
+también le cambié la codificación de UTF8 sin BOM  a UTF8, para que mostrara bien los signos y cosas
+
+Aqui está el ejemplo funcionando:
+
+http://jsfiddle.net/d7h2j6m8/3/
