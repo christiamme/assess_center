@@ -6,6 +6,7 @@ CREATE TABLE `aes_user_logs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user` text NOT NULL,
   `timestamp` datetime DEFAULT CURRENT_TIMESTAMP,
+  `login` BOOLEAN NOT NULL;
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 

@@ -104,20 +104,23 @@ require_once('../../resources/pluginimporter.php');
   };
   document.getElementById("signOut").onclick = function () {
     firebase.auth().signOut().then(function() {
-      // Sign-out successful
-      userinfo = {
-        name: "Nombre",
-        email: "Correo",
-        photoUrl: "../../vendors/theme/img/avatar2.png",
-        emailVerified: false,
-        uid: 0
-      }
-      alert("Cerraste sesión");
+      $.post( variables.server.concat("pages/login/logout.php"), function( data ) {
+        // Sign-out successful
+        userinfo = {
+          name: "Nombre",
+          email: "Correo",
+          photoUrl: "../../vendors/theme/img/avatar2.png",
+          emailVerified: false,
+          uid: 0
+        }
+        alert("Cerraste sesión");
+      });
     }).catch(function(error) {
       // An error happened
       alert("Hubo un error al cerrar tu sesión, vuelve a intentar.");
     });
   };
 </script>
+<script src="../../resources/js/variables.js" type="text/javascript"></script>
 </body>
 </html>
