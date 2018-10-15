@@ -1,27 +1,33 @@
 <?php
 
 session_start();
-// error_reporting(E_ALL);
-// ini_set('display_errors', '1');
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 require_once("../../resources/config_file.php");
 
-if (isset($_SESSION['user']) && ($_SESSION['level'] == 1 || $_SESSION['level'] == 4)) {
+if ( isset($_SESSION['aes_username']) ) {
 
     // Search in database
 
     // To protect MySQL injection, create parametrized query
-    $listaClientes = $DB_connection -> prepare('SELECT vts_clientes.id, vts_clientes.nomcomercial, vts_clientes.razon_social, vts_clientes.tel1 FROM vts_clientes WHERE 1');
+    $evaluaciones = $DB_connection -> prepare("SELECT aes_assessment_evento.inicio, CONCAT(aes_estudiantes.nombre, ' ', aes_estudiantes.paterno) AS evaluado, aes_assessment_evento.lugar, IF(aes_resultados.id IS NULL,'pendiente','iniciado') AS status, aes_assessment_asignacion.evaluador, aes_assessment_evento.titulo FROM `aes_assessment_asignacion` LEFT JOIN `aes_assessment_evento` ON aes_assessment_evento.id = aes_assessment_asignacion.evento_id LEFT JOIN aes_estudiantes ON aes_estudiantes.correo = aes_assessment_asignacion.estudiante LEFT JOIN aes_resultados ON aes_resultados.plan_id = aes_assessment_asignacion.plan_id WHERE evaluador = :username ORDER BY aes_assessment_evento.inicio ASC");
 
     // Execute query
-    $listaClientes -> execute();
+    $evaluaciones -> execute(
+      array(
+        'username' => $_SESSION['aes_username']
+      )
+    );
 
     // Unpack query content
-    while ( $row = $listaClientes -> fetch() ) {
+    while ( $row = $evaluaciones -> fetch() ) {
         $data[] = array(
-          'id' => $row['id'],
-          'nomcomercial' => utf8_encode($row['nomcomercial']),
-          'razon_social' => utf8_encode($row['razon_social']),
-          'tel1' => $row['tel1']
+          'fechahora' => $row['inicio'],
+          'estudiante' => $row['evaluado'],
+          'sala' => $row['lugar'],
+          'estado' => $row['status'],
+          'evaluador' => $row['evaluador'],
+          'evento' => $row['titulo']
         );
     }
 
@@ -29,7 +35,7 @@ if (isset($_SESSION['user']) && ($_SESSION['level'] == 1 || $_SESSION['level'] =
     $json = array(
             $data
         );
-    echo json_encode($json);
+    echo json_encode($json, JSON_UNESCAPED_UNICODE);
 
 } else {
     header("location:../login/login.php");

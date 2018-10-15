@@ -10,23 +10,26 @@ $(document).ready(function () {
           ]
       }
   );
+
   // Get content for the table
   $.getJSON(variables.server.concat("pages/evaluador/evaluaciones-get.php"),
   function (json) {
     /* / Clear "No data" message
     $("#tabla_clientes").find('tbody').empty(); */
     // Build table
-    // for (var i = 0; i < json[0].length; i++) {
-    //   nombre = '<a href="../cliente/cliente.php?id=' + json[0][i].id + '">' + json[0][i].nomcomercial + '</a>';
-    //
-    //   tabla.row.add([
-    //     nombre,
-    //     json[0][i].razon_social,
-    //     json[0][i].tel1,
-    //     '-'
-    //   ]).draw();
-    //
-    // }
+    for (var i = 0; i < json[0].length; i++) {
+      // nombre = '<a href="../cliente/cliente.php?id=' + json[0][i].id + '">' + json[0][i].nomcomercial + '</a>';
+      horario = '<a href="#">' + json[0][i].fechahora + '</a>';
+      alumno = '<a href="#">' + json[0][i].estudiante + '</a>';
+
+      tabla.row.add([
+        horario,
+        alumno,
+        json[0][i].sala,
+        json[0][i].estado
+      ]).draw();
+
+    }
   });
 
 });

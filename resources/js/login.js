@@ -26,7 +26,7 @@ firebase.auth().onAuthStateChanged(function(user) {
       }
     }
     // Start server session_start
-    $.post( variables.server.concat("pages/login/log.php"), {usuario: userinfo.name}, function( data ) {
+    $.post( variables.server.concat("pages/login/log.php"), {usuario: userinfo.email}, function( data ) {
       // Load user image, name and email
       // Header (visible)
       document.getElementById("userimage").src = userinfo.photoUrl;
