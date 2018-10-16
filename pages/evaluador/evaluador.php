@@ -30,6 +30,7 @@ require_once('../../resources/pluginimporter.php');
 	<!-- <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-storage.js"></script> -->
 
   <!-- Check login or log user -->
+  <script src="../../resources/js/variables.js" type="text/javascript"></script>
   <script src="../../resources/js/login.js"></script>
 
   <?php
@@ -121,7 +122,6 @@ require_once('../../resources/pluginimporter.php');
 	<?php
 		pluginimport('js', '../../', $plugins);
 	?>
-	<script src="../../resources/js/variables.js" type="text/javascript"></script>
 	<script src="evaluador.js" type="text/javascript"></script>
 
 </body>

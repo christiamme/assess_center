@@ -5,16 +5,12 @@ firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     // User is signed in.
     var user = firebase.auth().currentUser;
-    // var name, email, photoUrl, uid, emailVerified;
+    // var name, email, photoUrl
     if (user != null) {
       userinfo = {
         name: user.displayName,
         email: user.email,
-        photoUrl: user.photoURL,
-        emailVerified: user.emailVerified,
-        uid: user.uid  // The user's ID, unique to the Firebase project. Do NOT use
-                         // this value to authenticate with your backend server, if
-                         // you have one. Use User.getToken() instead.
+        photoUrl: user.photoURL
       }
     }
     // Start server session_start
