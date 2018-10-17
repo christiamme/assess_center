@@ -19,9 +19,9 @@ $(document).ready(function () {
     // Build table
     for (var i = 0; i < json[0].length; i++) {
       // nombre = '<a href="../cliente/cliente.php?id=' + json[0][i].id + '">' + json[0][i].nomcomercial + '</a>';
-      eval_url = '../evaluacion/evaluacion.php?evento=' + json[0][i].id_evento + '&est=' + json[0][i].email;
+      eval_url = '../evaluacion/evaluacion.php?evento=' + json[0][i].id_evento + '&plan=' + json[0][i].id_plan;
       horario = '<a href="' + eval_url + '">' + json[0][i].fechahora + '</a>';
-      alumno = '<a href="' + eval_url + '">' + json[0][i].estudiante + '</a>';
+      alumno = '<a href="' + eval_url + '">' + json[0][i].estudiante.replace(',', ', ') + '</a>';
 
       tabla.row.add([
         horario,

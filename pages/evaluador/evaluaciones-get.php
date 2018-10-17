@@ -10,7 +10,7 @@ if ( isset($_SESSION['aes_username']) ) {
     // Search in database
 
     // To protect MySQL injection, create parametrized query
-    $evaluaciones = $DB_connection -> prepare("SELECT aes_assessment_evento.inicio, CONCAT(aes_estudiantes.nombre, ' ', aes_estudiantes.paterno) AS evaluado, aes_estudiantes.correo, aes_assessment_evento.lugar, IF(aes_resultados.id IS NULL,'pendiente','iniciado') AS status, aes_assessment_asignacion.evaluador, aes_assessment_evento.titulo, aes_assessment_asignacion.evento_id FROM `aes_assessment_asignacion` LEFT JOIN `aes_assessment_evento` ON aes_assessment_evento.id = aes_assessment_asignacion.evento_id LEFT JOIN aes_estudiantes ON aes_estudiantes.correo = aes_assessment_asignacion.estudiante LEFT JOIN aes_resultados ON aes_resultados.plan_id = aes_assessment_asignacion.plan_id WHERE evaluador = :username ORDER BY aes_assessment_evento.inicio ASC");
+    $evaluaciones = $DB_connection -> prepare("SELECT aes_assessment_evento.inicio, GROUP_CONCAT(CONCAT(aes_estudiantes.nombre, ' ', aes_estudiantes.paterno)) AS evaluado, GROUP_CONCAT(aes_estudiantes.correo) AS correo, aes_assessment_evento.lugar, IF(aes_resultados.id IS NULL,'pendiente','iniciado') AS status, aes_assessment_asignacion.evaluador, aes_assessment_evento.titulo, aes_assessment_asignacion.evento_id, aes_assessment_asignacion.plan_id FROM `aes_assessment_asignacion` LEFT JOIN `aes_assessment_evento` ON aes_assessment_evento.id = aes_assessment_asignacion.evento_id LEFT JOIN aes_estudiantes ON aes_estudiantes.correo = aes_assessment_asignacion.estudiante LEFT JOIN aes_resultados ON aes_resultados.plan_id = aes_assessment_asignacion.plan_id WHERE evaluador = :username GROUP BY aes_assessment_asignacion.evento_id, aes_assessment_asignacion.plan_id ORDER BY aes_assessment_evento.inicio ASC");
 
     // Execute query
     $evaluaciones -> execute(
@@ -29,7 +29,8 @@ if ( isset($_SESSION['aes_username']) ) {
           'estado' => $row['status'],
           'evaluador' => $row['evaluador'],
           'evento' => $row['titulo'],
-          'id_evento' => $row['evento_id']
+          'id_evento' => $row['evento_id'],
+          'id_plan' => $row['plan_id']
         );
     }
 
