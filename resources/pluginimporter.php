@@ -25,6 +25,7 @@ USO:
 					'icheck',
 					'inputmask',
 					'ionicons',
+					'jqueryui',
 					'leds',
 					'momentjs',
 					'select2',
@@ -123,6 +124,9 @@ $pluginPATH['ionicons']['css'][1]		= "vendors/plugins/ionicons/css/ionicons.min.
 
 //JQUERY 2.2.4 * (Ultima version 2.x, con la 3.x no funciona bootstrap) (10/06/2016)
 $pluginPATH['jquery']['js'][1]			= "vendors/plugins/jquery/jquery.min.js";
+
+//JQUERY-UI (10/06/2016)
+$pluginPATH['jqueryui']['js'][1]			= "vendors/plugins/jQueryUI/jquery-ui.min.js";
 
 //LEDS
 $pluginPATH['leds']['css'][1]			= "vendors/plugins/leds/leds.css";
