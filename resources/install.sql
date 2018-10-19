@@ -139,9 +139,13 @@ CREATE TABLE `aes_assessment_asignacion` (
 CREATE TABLE `aes_resultados` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `registration` datetime DEFAULT CURRENT_TIMESTAMP,
-  `plan_id` int(11) DEFAULT NULL,
+  `asignacion_id` int(11) DEFAULT NULL,
+  `estudiante` text DEFAULT NULL,
+  `evaluador` text DEFAULT NULL,
+  `plan_detalle_id` int(11) DEFAULT NULL,
+  `dimension_id` int(11) DEFAULT NULL,
   `nivel` int(11) DEFAULT NULL,
   `comentario` text DEFAULT NULL,
-  `editar` BOOLEAN NOT NULL DEFAULT TRUE;
+  `editar` BOOLEAN NOT NULL DEFAULT TRUE,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
