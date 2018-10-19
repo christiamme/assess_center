@@ -55,6 +55,10 @@ $pluginPATH['bootbox']['js'][1]			= "vendors/plugins/bootbox/bootbox.min.js";
 $pluginPATH['bootstrap']['css'][1] 		= "vendors/theme/bootstrap/css/bootstrap.min.css";
 $pluginPATH['bootstrap']['js'][1]		= "vendors/theme/bootstrap/js/bootstrap.min.js";
 
+//BOOTSTRAP SLIDER 10.2.1 (25/09/2018)
+$pluginPATH['bootstrap-slider']['css'][1] 		= "vendors/plugins/bootstrap-slider/css/bootstrap-slider.min.css";
+$pluginPATH['bootstrap-slider']['js'][1]		= "vendors/plugins/bootstrap-slider/bootstrap-slider.min.js";
+
 //BOOTSTRAP TABS (10/06/2016)
 $pluginPATH['bootstrap-tabs']['css'][1]	= "vendors/plugins/bootstrap-tabs/bootstrap-tabs.css";
 
@@ -150,6 +154,9 @@ $pluginPATH['spinjs']['js'][2]			= "vendors/plugins/spin/jquery.spin.js";
 //STAR RATING 4.0.1 (10/06/2016)
 $pluginPATH['starrating']['css'][1]		= "vendors/plugins/starRating/star-rating.min.css";
 $pluginPATH['starrating']['js'][1]		= "vendors/plugins/starRating/star-rating.min.js";
+
+//SWEETALERT 2.1.0 (18/10/2018)
+$pluginPATH['sweetalert']['js'][1]		= "vendors/plugins/sweetalert/sweetalert.min.js";
 
 //TEMA ADMINLTE 2.3.0 * (10/06/2016)
 $pluginPATH['tema']['css'][1]			= "vendors/theme/css/AdminLTE.min.css";
