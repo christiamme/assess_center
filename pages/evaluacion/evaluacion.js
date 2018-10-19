@@ -78,9 +78,73 @@ $(document).ready(function () {
     }
   });
 
+  // Load Activities
+  $.get( variables.server.concat("pages/evaluacion/evaluacion-actividades-get.php"), {evento: document.getElementById("id_evento").innerHTML, plan: document.getElementById("id_plan").innerHTML}, function( data ) {
+    $( "#acts" ).html( data );
+  });
+  // Use this after new boxes to be activated after loading
+  // .load(content, function(){
+  //   $('.box').activateBox();
+  // });
+
 });
+
+// Save results and next step
+function saveNext (step) {
+  // Save results
+
+  // Alert user of saved results
+  swal({
+    title: "¡Actividad "+step+" guardada!",
+    text: "Se guardaron los datos de la evaluación de la Actividad "+step+".",
+    icon: "success",
+    button: 'Continuar'
+  });
+  document.getElementById("check"+step).style.display = "";
+  document.getElementById("cross"+step).style.display = "none";
+  document.getElementById("collapse"+step).className = "panel-collapse collapse";
+  // Collapse current activity
+
+  // If next activity
+
+  // Open next activity
+
+  // If assessment ended
+
+  // Alert user of saved results
+
+  // Go to Dashboard
+
+}
+
+// Save results and next step
+function displayDim (sliderInput) {
+  var callout = sliderInput.id.substring(5);
+  document.getElementById("callout0"+callout).style.display = "none";
+  document.getElementById("callouta"+callout).style.display = "none";
+  document.getElementById("calloutb"+callout).style.display = "none";
+  document.getElementById("calloutc"+callout).style.display = "none";
+  if (sliderInput.value == 4) {
+    document.getElementById("calloutc"+callout).style.display = "";
+  } else if (sliderInput.value == 3) {
+    document.getElementById("calloutb"+callout).style.display = "";
+  } else if (sliderInput.value == 2) {
+    document.getElementById("callouta"+callout).style.display = "";
+  } else {
+    document.getElementById("callout0"+callout).style.display = "";
+  }
+}
 
 // Logout
 document.getElementById("signOut").onclick = function () {
   window.location.href = "../login/login.php";
 };
+
+// // Get info about input that was triggered
+// $(document).ready(function(){
+//         $("button").click(function(){
+//             var myStr = "input_1a-2d";
+//             var subStr = myStr.match("-(.*)d");
+//             alert(subStr[1]);
+//         });
+//     });

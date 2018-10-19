@@ -39,10 +39,10 @@ require_once('../../resources/pluginimporter.php');
   <?php
 		$plugins = ['jquery',
 					'bootstrap',
-					'datatables',
+          'bootstrap-slider',
           'fontawesome',
           'ionicons',
-          'jqueryui',
+          'sweetalert',
           'tema'];
 		pluginimport('css', '../../', $plugins);
 	?>
@@ -135,11 +135,11 @@ require_once('../../resources/pluginimporter.php');
       <!-- /.row -->
       <div class="row">
         <div class="col-md-12">
-  				<div class="box box-success"  id="estudiantes">
+  				<div class="box box-success collapsed-box" id="estudiantes">
             <div class="box-header with-border">
               <h3 class="box-title" id="act_title">Estudiantes a Evaluar</h3>
               <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse" id="ests_box_button"><i class="fa fa-minus"></i>
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" id="ests_box_button"><i class="fa fa-plus"></i>
                 </button>
               </div>
             </div>
@@ -160,110 +160,18 @@ require_once('../../resources/pluginimporter.php');
       <!-- /.row -->
       <div class="row">
         <div class="col-md-12">
-  				<div class="box box-success">
+          <div class="box box-solid">
             <div class="box-header with-border">
-              <h3 class="box-title" id="act_title">Actividad 1</h3>
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-              </div>
+              <h3 class="box-title">Actividades</h3>
             </div>
-            <!-- /.box-body -->
-              <div class="box-body">
-                <div>Descripción</div>
-                <div>Dimensión 1</div>
-                <div>Dimensión 2</div>
-              </div>
-              <!-- /.box-body -->
-              <div class="box-footer text-center">
+            <!-- /.box-header -->
+            <div class="box-body" id="acts">
 
-              </div>
-              <!-- /.box-body -->
-            </div>
-            <!-- /.box -->
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-      <div class="row">
-        <div class="col-md-12">
-  				<div class="box box-warning">
-            <div class="box-header with-border">
-              <h3 class="box-title" id="act_title">Dimensión 1</h3>
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-              </div>
             </div>
             <!-- /.box-body -->
-              <div class="box-body">
-                <div>Descripción</div>
-                <hr />
-                <div>Estudiante 1</div>
-                <div>Opciones</div>
-                <div class="box-footer box-comments">
-                  <div class="box-comment">
-                    <div class="comment-text">Descriptor dinámico</div>
-                  </div>
-                </div>
-                <hr />
-                <div>Estudiante 2</div>
-                <div>Opciones</div>
-                <div class="box-footer box-comments">
-                  <div class="box-comment">
-                    <div class="comment-text">Descriptor dinámico</div>
-                  </div>
-                </div>
-              </div>
-              <!-- /.box-body -->
-              <div class="box-footer text-center">
-
-              </div>
-              <!-- /.box-body -->
-            </div>
-            <!-- /.box -->
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-      <div class="row">
-        <div class="col-md-12">
-  				<div class="box box-success">
-            <div class="box-header with-border">
-              <h3 class="box-title" id="act_title">Dimensión 2</h3>
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-              </div>
-            </div>
-            <!-- /.box-body -->
-              <div class="box-body">
-                <div>Descripción</div>
-                <hr />
-                <div>Estudiante 1</div>
-                <div>Opciones</div>
-                <div class="box-footer box-comments">
-                  <div class="box-comment">
-                    <div class="comment-text">Descriptor dinámico</div>
-                  </div>
-                </div>
-                <hr />
-                <div>Estudiante 2</div>
-                <div>Opciones</div>
-                <div class="box-footer box-comments">
-                  <div class="box-comment">
-                    <div class="comment-text">Descriptor dinámico</div>
-                  </div>
-                </div>
-              </div>
-              <!-- /.box-body -->
-              <div class="box-footer text-center">
-                <button class="btn btn-danger" id="siguiente"><i class="fa fa-save"></i> Guardar y Siguiente</button>
-              </div>
-              <!-- /.box-body -->
-            </div>
-            <!-- /.box -->
-        </div>
+          </div>
+          <!-- /.box -->
+  			</div>
         <!-- /.col -->
       </div>
       <!-- /.row -->
