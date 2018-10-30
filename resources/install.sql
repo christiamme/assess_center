@@ -149,3 +149,11 @@ CREATE TABLE `aes_resultados` (
   `editar` BOOLEAN NOT NULL DEFAULT TRUE,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+
+CREATE TABLE `aes_user_images` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `registration` datetime DEFAULT CURRENT_TIMESTAMP,
+  `user` text DEFAULT NULL,
+  `img_url` text DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
