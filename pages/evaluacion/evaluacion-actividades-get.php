@@ -13,7 +13,7 @@ $horario = "Sin definir";
 $id_evento = $_GET['evento'];
 $id_plan = $_GET['plan'];
 
-$colores = array('success', 'primary', 'danger');
+$colores = array('success', 'primary', 'warning');
 
 if ( isset($_SESSION['aes_username']) ) {
 
