@@ -18,6 +18,7 @@ require_once('../../resources/pluginimporter.php');
           'fontawesome',
           'ionicons',
           'icheck',
+          'sweetalert',
           'tema'];
 		pluginimport('css', '../../', $plugins);
 	?>
@@ -114,11 +115,22 @@ require_once('../../resources/pluginimporter.php');
           emailVerified: false,
           uid: 0
         }
-        alert("Cerraste sesión");
+        // Alert user of saved results
+        swal({
+          title: "Sesión cerrada con éxito",
+          text: "¡Gracias por visitarnos!",
+          icon: "success",
+          button: true
+        });
       });
     }).catch(function(error) {
       // An error happened
-      alert("Hubo un error al cerrar tu sesión, vuelve a intentar.");
+      swal({
+        title: "Error al cerrar sesión",
+        text: "Hubo un error al cerrar tu sesión, vuelve a intentar.",
+        icon: "warning",
+        button: true
+      });
     });
   };
 </script>
