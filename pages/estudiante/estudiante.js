@@ -7,7 +7,7 @@ $(document).ready(function () {
 // Update User Picture
 function UpdatePic() {
   $.get( variables.server.concat("pages/estudiante/update-photo.php"), {url: userinfo.photoUrl}, function( data ) {
-    UserPicture();
+    setTimeout(UserPicture(), 3000);
   });
 };
 
