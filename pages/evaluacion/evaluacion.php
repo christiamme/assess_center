@@ -4,8 +4,9 @@
 session_start();
 $AppNombre = 'AES';
 
-$id_evento = $_GET['evento'];
-$id_plan = $_GET['plan'];
+$id_evento = $_GET['vt'];
+$id_plan = $_GET['pl'];
+$id_asignacion = $_GET['sg'];
 
 // Required and Includes
 require_once('../../resources/pluginimporter.php');
@@ -60,6 +61,7 @@ require_once('../../resources/pluginimporter.php');
 <body class="hold-transition skin-blue sidebar-mini">
 <?php echo '<div id="id_plan" style="display:none;">'.$id_plan.'</div>'; ?>
 <?php echo '<div id="id_evento" style="display:none;">'.$id_evento.'</div>'; ?>
+<?php echo '<div id="id_asignacion" style="display:none;">'.$id_asignacion.'</div>'; ?>
 <div class="wrapper">
 
   <?php

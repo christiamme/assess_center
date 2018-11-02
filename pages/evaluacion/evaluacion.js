@@ -112,20 +112,20 @@ function saveNext (step, act_id) {
     }
   }
   formData = {
-      evento: document.getElementById("id_evento").innerHTML,
-      plan: document.getElementById("id_plan").innerHTML,
+      vt: document.getElementById("id_evento").innerHTML,
+      pl: document.getElementById("id_plan").innerHTML,
+      sg: document.getElementById("id_asignacion").innerHTML,
       resultados: res
   };
 
-
-  // displayText = "Se guardaron los datos de la evaluación de la Actividad "+step+".";
-  displayText = JSON.stringify(formData);
   // Alert user of saved results
-  swal({
-    title: "¡Actividad "+step+" guardada!",
-    text: displayText,
-    icon: "success",
-    button: 'Continuar'
+  $.get( variables.server.concat("pages/evaluacion/evaluacion-set.php"), formData, function( data ) {
+    swal({
+      title: "¡Actividad "+step+" guardada!",
+      text: data,
+      icon: "success",
+      button: 'Continuar'
+    });
   });
   document.getElementById("check"+step).style.display = "";
   document.getElementById("cross"+step).style.display = "none";
