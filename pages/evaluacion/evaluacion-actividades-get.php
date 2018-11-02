@@ -194,7 +194,7 @@ if ( isset($_SESSION['aes_username']) ) {
           <?php } // foreach ($dimensiones as $dimension) ends  ?>
           </div>
           <div class="box-footer text-center">
-            <button class="btn btn-primary" id="siguiente" onclick="saveNext(<?php echo $i; ?>)"><i class="fa fa-save"></i> Guardar Actividad</button>
+            <button class="btn btn-primary" id="siguiente" onclick="saveNext(<?php echo $i.','.$actividad['id_actividad']; ?>)"><i class="fa fa-save"></i> Guardar Actividad</button>
           </div>
           <!-- /.box-footer -->
         </div>

@@ -90,30 +90,46 @@ $(document).ready(function () {
 });
 
 // Save results and next step
-function saveNext (step) {
-  // Save results
+function saveNext (step, act_id) {
 
+  // Save results
+  // {evento: document.getElementById("id_evento").innerHTML, plan: document.getElementById("id_plan").innerHTML}
+  // var myStr = "input_1a-2d";
+  // var subStr = myStr.match("-(.*)d");
+  comments = document.getElementsByTagName('textarea');
+  inputs = document.getElementsByTagName('input');
+  res = [];
+
+  for (i = 0; i < inputs.length; i++) {
+    act = inputs[i].id;
+    valor = inputs[i].value;
+    comentario = comments[i].value;
+    id_act = act.match("_(.*)-")[1];
+    dim = act.match("-(.*)_")[1];
+    student = act.match("a(.*)")[0];
+    if (id_act == act_id) {
+      res.push([student, id_act, dim, valor, comentario]);
+    }
+  }
+  formData = {
+      evento: document.getElementById("id_evento").innerHTML,
+      plan: document.getElementById("id_plan").innerHTML,
+      resultados: res
+  };
+
+
+  // displayText = "Se guardaron los datos de la evaluación de la Actividad "+step+".";
+  displayText = JSON.stringify(formData);
   // Alert user of saved results
   swal({
     title: "¡Actividad "+step+" guardada!",
-    text: "Se guardaron los datos de la evaluación de la Actividad "+step+".",
+    text: displayText,
     icon: "success",
     button: 'Continuar'
   });
   document.getElementById("check"+step).style.display = "";
   document.getElementById("cross"+step).style.display = "none";
   document.getElementById("collapse"+step).className = "panel-collapse collapse";
-  // Collapse current activity
-
-  // If next activity
-
-  // Open next activity
-
-  // If assessment ended
-
-  // Alert user of saved results
-
-  // Go to Dashboard
 
 }
 
