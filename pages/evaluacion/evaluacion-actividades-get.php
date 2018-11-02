@@ -164,9 +164,9 @@ if ( isset($_SESSION['aes_username']) ) {
             </div>
             <div class="col-md-9 text-center" style="margin-bottom:40px;">
                 <?php
-                  $input_tag[] = 'input_'.$dimension['id_actividad'].'-'.$dimension['id_dimension'].'_'.substr($estudiante['correo'],0,-9);
+                  $input_tag[] = 'input_'.$dimension['id_actividad'].'-'.$dimension['id_dimension'].'_'.$estudiante['id_asignacion'].substr($estudiante['correo'],0,-9);
                 ?>
-                <input id="input_<?php echo $dimension['id_actividad'].'-'.$dimension['id_dimension'].'_'.substr($estudiante['correo'],0,-9); ?>" type="text" data-slider-ticks="[1, 2, 3, 4]" data-slider-ticks-labels="<?php echo $tick_labels[$i]; ?>" data-slider-ticks-snap-bounds="1" data-slider-value="1" data-slider-tooltip="hide" onchange="displayDim(this)"/>
+                <input id="input_<?php echo $dimension['id_actividad'].'-'.$dimension['id_dimension'].'_'.$estudiante['id_asignacion'].substr($estudiante['correo'],0,-9); ?>" type="text" data-slider-ticks="[1, 2, 3, 4]" data-slider-ticks-labels="<?php echo $tick_labels[$i]; ?>" data-slider-ticks-snap-bounds="1" data-slider-value="1" data-slider-tooltip="hide" onchange="displayDim(this)"/>
             </div>
             <div class="col-md-12">
               <?php
@@ -175,7 +175,7 @@ if ( isset($_SESSION['aes_username']) ) {
                 $i_n=0;
                 foreach ($dimension['descr_niveles'] as $describe_nivel) {
               ?>
-              <div class="callout callout-info" <?php echo ($i_n>0 ? 'style="display:none;"' : false); ?> id="<?php echo $tag[$i_n].'_'.$dimension['id_actividad'].'-'.$dimension['id_dimension'].'_'.substr($estudiante['correo'],0,-9); ?>">
+              <div class="callout callout-info" <?php echo ($i_n>0 ? 'style="display:none;"' : false); ?> id="<?php echo $tag[$i_n].'_'.$dimension['id_actividad'].'-'.$dimension['id_dimension'].'_'.$estudiante['id_asignacion'].substr($estudiante['correo'],0,-9); ?>">
                 <p>
                   <?php echo $describe_nivel; ?>
                 </p>
@@ -186,7 +186,7 @@ if ( isset($_SESSION['aes_username']) ) {
             </div>
             <div style="margin-bottom:30px;">
               <label>Comentario a <?php echo $estudiante['nombre']; ?>:</label>
-              <textarea class="form-control" rows="3" placeholder="Comentario de retroalimentación al estudiante" id="comentario_<?php echo $dimension['id_actividad'].'-'.$dimension['id_dimension'].'_'.substr($estudiante['correo'],0,-9); ?>"></textarea>
+              <textarea class="form-control" rows="3" placeholder="Comentario de retroalimentación al estudiante" id="comentario_<?php echo $dimension['id_actividad'].'-'.$dimension['id_dimension'].'_'.$estudiante['id_asignacion'].substr($estudiante['correo'],0,-9); ?>"></textarea>
             </div>
           <?php } // foreach ($asignaciones as $estudiante) ends
             } // else $dimension['id_actividad'] ends ?>

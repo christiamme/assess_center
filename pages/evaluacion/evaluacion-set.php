@@ -8,7 +8,6 @@ require_once("../../resources/config_file.php");
 $resultados = $_GET['resultados'];
 $evento = $_GET['vt'];
 $plan = $_GET['pl'];
-$asignacion = $_GET['sg'];
 
 if ( isset($_SESSION['aes_username']) ) {
 
@@ -23,7 +22,7 @@ if ( isset($_SESSION['aes_username']) ) {
       // Execute query
       $evaluaciones -> execute(
         array(
-          'asignacion_id' => $asignacion,
+          'asignacion_id' => $resultado[5],
           'estudiante' => $resultado[0].'@itesm.mx',
           'evaluador' => $_SESSION['aes_username'],
           'plan_detalle_id' => $resultado[1],

@@ -106,15 +106,15 @@ function saveNext (step, act_id) {
     comentario = comments[i].value;
     id_act = act.match("_(.*)-")[1];
     dim = act.match("-(.*)_")[1];
+    asg = act.match("_(.*)a")[1].match("_(.*)")[1];
     student = act.match("a(.*)")[0];
     if (id_act == act_id) {
-      res.push([student, id_act, dim, valor, comentario]);
+      res.push([student, id_act, dim, valor, comentario, asg]);
     }
   }
   formData = {
       vt: document.getElementById("id_evento").innerHTML,
       pl: document.getElementById("id_plan").innerHTML,
-      sg: document.getElementById("id_asignacion").innerHTML,
       resultados: res
   };
 
