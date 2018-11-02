@@ -46,7 +46,8 @@ if ( isset($_SESSION['aes_username']) ) {
     // Search for assigned students
 
     // To protect MySQL injection, create parametrized query
-    $busqueda = $DB_connection -> prepare("SELECT aes_assessment_asignacion.id AS asignacion, aes_assessment_evento.inicio, CONCAT(aes_estudiantes.nombre, ' ', aes_estudiantes.paterno) AS evaluado, aes_estudiantes.correo AS correo, aes_assessment_evento.lugar, IF(aes_resultados.id IS NULL,'pendiente','iniciado') AS status, aes_assessment_asignacion.evaluador, aes_assessment_asignacion.evento_id, aes_assessment_asignacion.plan_id FROM `aes_assessment_asignacion` LEFT JOIN `aes_assessment_evento` ON aes_assessment_evento.id = aes_assessment_asignacion.evento_id LEFT JOIN aes_estudiantes ON aes_estudiantes.correo = aes_assessment_asignacion.estudiante LEFT JOIN aes_resultados ON aes_resultados.plan_detalle_id = aes_assessment_asignacion.plan_id WHERE aes_assessment_asignacion.evaluador = :username AND evento_id = :id_evento AND aes_assessment_asignacion.plan_id = :id_plan");
+    $busqueda = $DB_connection -> prepare("SELECT aes_assessment_asignacion.id AS asignacion, aes_assessment_evento.inicio, CONCAT(aes_estudiantes.nombre, ' ', aes_estudiantes.paterno) AS evaluado, aes_estudiantes.correo AS correo, aes_assessment_evento.lugar, IF(aes_resultados.id IS NULL,'pendiente','iniciado') AS status, aes_assessment_asignacion.evaluador, aes_assessment_asignacion.evento_id, aes_assessment_asignacion.plan_id,
+    IF(aes_user_images.img_url IS NULL, '../../vendors/theme/img/avatar2.png', aes_user_images.img_url) AS foto FROM `aes_assessment_asignacion` LEFT JOIN `aes_assessment_evento` ON aes_assessment_evento.id = aes_assessment_asignacion.evento_id LEFT JOIN aes_estudiantes ON aes_estudiantes.correo = aes_assessment_asignacion.estudiante LEFT JOIN aes_resultados ON aes_resultados.plan_detalle_id = aes_assessment_asignacion.plan_id LEFT JOIN aes_user_images ON aes_user_images.user = aes_estudiantes.correo WHERE aes_assessment_asignacion.evaluador = :username AND evento_id = :id_evento AND aes_assessment_asignacion.plan_id = :id_plan");
 
     // Execute query
     $busqueda -> execute(
@@ -63,7 +64,7 @@ if ( isset($_SESSION['aes_username']) ) {
         'id_asignacion' => $row['asignacion'],
         'nombre' => $row['evaluado'],
         'correo' => $row['correo'],
-        'foto' => "../../vendors/theme/img/avatar2.png",
+        'foto' => $row['foto']
       );
     }
 
