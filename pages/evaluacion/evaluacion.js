@@ -120,16 +120,27 @@ function saveNext (step, act_id) {
 
   // Alert user of saved results
   $.get( variables.server.concat("pages/evaluacion/evaluacion-set.php"), formData, function( data ) {
-    swal({
-      title: "¡Actividad "+step+" guardada!",
-      text: data,
-      icon: "success",
-      button: 'Continuar'
-    });
+    if(data=="Se guardaron los datos de la evaluación de la Actividad"){
+      swal({
+        title: "¡Actividad "+step+" guardada!",
+        text: data,
+        icon: "success",
+        button: 'Continuar'
+      });
+      document.getElementById("check"+step).style.display = "";
+      document.getElementById("cross"+step).style.display = "none";
+      document.getElementById("collapse"+step).className = "panel-collapse collapse";
+    }
+    else {
+      swal({
+        title: "¡Error al guardar Actividad "+step+"!",
+        text: "Fallo de comunicación: Intenta nuevamente en un minuto.",
+        icon: "warning",
+        button: 'Continuar'
+      });
+    }
+
   });
-  document.getElementById("check"+step).style.display = "";
-  document.getElementById("cross"+step).style.display = "none";
-  document.getElementById("collapse"+step).className = "panel-collapse collapse";
 
 }
 
