@@ -177,6 +177,27 @@ require_once('../../resources/pluginimporter.php');
         <!-- /.col -->
       </div>
       <!-- /.row -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-success collapsed-box" id="envios_box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Enviado Previamente</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" id="envios_box_button"><i class="fa fa-plus"></i>
+                </button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body" id="envios_box_body">
+
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+  			</div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
 
     </section>
     <!-- /.content -->

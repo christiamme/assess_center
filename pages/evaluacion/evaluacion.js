@@ -87,6 +87,32 @@ $(document).ready(function () {
   //   $('.box').activateBox();
   // });
 
+  // Load Previously Sent Forms
+  $("#envios_box").boxRefresh({
+    // The URL for the source.
+    source: variables.server.concat("pages/evaluacion/evaluacion-sent-get.php"),
+    // GET query paramaters (example: {search_term: 'layout'}, which renders to URL/?search_term=layout).
+    params: {evento: document.getElementById("id_evento").innerHTML, plan: document.getElementById("id_plan").innerHTML},
+    // The CSS selector to the refresh button.
+    trigger: '#envios_box_button',
+    // The CSS selector to the target where the content should be rendered. This selector should exist within the box.
+    content: '#envios_box_body',
+    // Whether to automatically render the content.
+    loadInContent: true,
+    // Response type (example: 'json' or 'html')
+    responseType: 'html',
+    // The HTML template for the ajax spinner.
+    overlayTemplate: '<div class="overlay"><div class="fa fa-refresh fa-spin"></div></div>',
+    // Called before the ajax request is made.
+    onLoadStart: function() {
+      // Do something before sending the request.
+    },
+    // Called after the ajax request is made.
+    onLoadDone: function(response) {
+      // Do something after receiving a response.
+    }
+  });
+
 });
 
 // Save results and next step
@@ -119,27 +145,35 @@ function saveNext (step, act_id) {
   };
 
   // Alert user of saved results
-  $.get( variables.server.concat("pages/evaluacion/evaluacion-set.php"), formData, function( data ) {
-    if(data=="Se guardaron los datos de la evaluación de la Actividad"){
-      swal({
-        title: "¡Actividad "+step+" guardada!",
-        text: data,
-        icon: "success",
-        button: 'Continuar'
-      });
-      document.getElementById("check"+step).style.display = "";
-      document.getElementById("cross"+step).style.display = "none";
-      document.getElementById("collapse"+step).className = "panel-collapse collapse";
-    }
-    else {
-      swal({
-        title: "¡Error al guardar Actividad "+step+"!",
-        text: "Fallo de comunicación: Intenta nuevamente en un minuto.",
-        icon: "warning",
-        button: 'Continuar'
-      });
-    }
-
+  $.get( variables.server.concat("pages/evaluacion/evaluacion-set.php"), formData )
+    .done( function( data ) {
+      if(data=="Se guardaron los datos de la evaluación de la Actividad"){
+        swal({
+          title: "¡Actividad "+step+" guardada!",
+          text: data,
+          icon: "success",
+          button: 'Continuar'
+        });
+        document.getElementById("check"+step).style.display = "";
+        document.getElementById("cross"+step).style.display = "none";
+        document.getElementById("collapse"+step).className = "panel-collapse collapse";
+      }
+      else {
+        swal({
+          title: "¡Error al guardar Actividad "+step+"!",
+          text: "Fallo de comunicación: Intenta nuevamente en un minuto.",
+          icon: "warning",
+          button: 'Continuar'
+        });
+      }
+  })
+  .fail( function( data ) {
+    swal({
+      title: "¡Error al guardar Actividad "+step+"!",
+      text: "Fallo de comunicación: Intenta nuevamente en un minuto.",
+      icon: "warning",
+      button: 'Continuar'
+    });
   });
 
 }
