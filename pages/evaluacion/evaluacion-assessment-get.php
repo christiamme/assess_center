@@ -11,7 +11,7 @@ $lugar = "Por determinar";
 $horario = "Sin definir";
 
 $id_evento = $_GET['evento'];
-$id_evento = $_GET['plan'];
+$id_plan = $_GET['plan'];
 
 if ( isset($_SESSION['aes_username']) ) {
 
