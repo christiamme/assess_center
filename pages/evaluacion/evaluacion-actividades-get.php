@@ -45,8 +45,13 @@ if ( isset($_SESSION['aes_username']) ) {
 
     // Search for assigned students
 
-    // To protect MySQL injection, create parametrized query
-    $busqueda = $DB_connection -> prepare("SELECT aes_assessment_asignacion.id AS asignacion, aes_assessment_evento.inicio, CONCAT(aes_estudiantes.nombre, ' ', aes_estudiantes.paterno) AS evaluado, aes_estudiantes.correo AS correo, aes_assessment_evento.lugar, IF(aes_resultados.id IS NULL,'pendiente','iniciado') AS status, aes_assessment_asignacion.evaluador, aes_assessment_asignacion.evento_id, aes_assessment_asignacion.plan_id FROM `aes_assessment_asignacion` LEFT JOIN `aes_assessment_evento` ON aes_assessment_evento.id = aes_assessment_asignacion.evento_id LEFT JOIN aes_estudiantes ON aes_estudiantes.correo = aes_assessment_asignacion.estudiante LEFT JOIN aes_resultados ON aes_resultados.plan_detalle_id = aes_assessment_asignacion.plan_id WHERE aes_assessment_asignacion.evaluador = :username AND evento_id = :id_evento AND aes_assessment_asignacion.plan_id = :id_plan");
+    $busqueda = $DB_connection -> prepare("SET SQL_BIG_SELECTS=1;");
+
+    // Execute query
+    $busqueda -> execute();
+
+    $busqueda = $DB_connection -> prepare("SELECT aes_assessment_asignacion.id AS asignacion, aes_assessment_evento.inicio, CONCAT(aes_estudiantes.nombre, ' ', aes_estudiantes.paterno) AS evaluado, aes_estudiantes.correo AS correo, aes_assessment_evento.lugar, IF(aes_resultados.id IS NULL,'pendiente','iniciado') AS status, aes_assessment_asignacion.evaluador, aes_assessment_asignacion.evento_id, aes_assessment_asignacion.plan_id,
+    IF(t2.img_url IS NULL, '../../vendors/theme/img/avatar2.png', t2.img_url) AS foto FROM `aes_assessment_asignacion` LEFT JOIN `aes_assessment_evento` ON aes_assessment_evento.id = aes_assessment_asignacion.evento_id LEFT JOIN aes_estudiantes ON aes_estudiantes.correo = aes_assessment_asignacion.estudiante LEFT JOIN aes_resultados ON aes_resultados.plan_detalle_id = aes_assessment_asignacion.plan_id LEFT JOIN (SELECT MAX(aes_user_images.id) AS max_id, aes_user_images.img_url AS img_url, aes_user_images.user AS user FROM aes_user_images WHERE 1 GROUP BY aes_user_images.user) AS t2 ON aes_estudiantes.correo = t2.user WHERE aes_assessment_asignacion.evaluador = :username AND evento_id = :id_evento AND aes_assessment_asignacion.plan_id = :id_plan");
 
     // Execute query
     $busqueda -> execute(
@@ -63,7 +68,7 @@ if ( isset($_SESSION['aes_username']) ) {
         'id_asignacion' => $row['asignacion'],
         'nombre' => $row['evaluado'],
         'correo' => $row['correo'],
-        'foto' => "../../vendors/theme/img/avatar2.png",
+        'foto' => $row['foto']
       );
     }
 
@@ -164,9 +169,9 @@ if ( isset($_SESSION['aes_username']) ) {
             </div>
             <div class="col-md-9 text-center" style="margin-bottom:40px;">
                 <?php
-                  $input_tag[] = 'input_'.$dimension['id_actividad'].'-'.$dimension['id_dimension'].'_'.substr($estudiante['correo'],0,-9);
+                  $input_tag[] = 'input_'.$dimension['id_actividad'].'-'.$dimension['id_dimension'].'_'.$estudiante['id_asignacion'].substr($estudiante['correo'],0,-9);
                 ?>
-                <input id="input_<?php echo $dimension['id_actividad'].'-'.$dimension['id_dimension'].'_'.substr($estudiante['correo'],0,-9); ?>" type="text" data-slider-ticks="[1, 2, 3, 4]" data-slider-ticks-labels="<?php echo $tick_labels[$i]; ?>" data-slider-ticks-snap-bounds="1" data-slider-value="1" data-slider-tooltip="hide" onchange="displayDim(this)"/>
+                <input id="input_<?php echo $dimension['id_actividad'].'-'.$dimension['id_dimension'].'_'.$estudiante['id_asignacion'].substr($estudiante['correo'],0,-9); ?>" type="text" data-slider-ticks="[1, 2, 3, 4]" data-slider-ticks-labels="<?php echo $tick_labels[$i]; ?>" data-slider-ticks-snap-bounds="1" data-slider-value="1" data-slider-tooltip="hide" onchange="displayDim(this)"/>
             </div>
             <div class="col-md-12">
               <?php
@@ -175,7 +180,7 @@ if ( isset($_SESSION['aes_username']) ) {
                 $i_n=0;
                 foreach ($dimension['descr_niveles'] as $describe_nivel) {
               ?>
-              <div class="callout callout-info" <?php echo ($i_n>0 ? 'style="display:none;"' : false); ?> id="<?php echo $tag[$i_n].'_'.$dimension['id_actividad'].'-'.$dimension['id_dimension'].'_'.substr($estudiante['correo'],0,-9); ?>">
+              <div class="callout callout-info" <?php echo ($i_n>0 ? 'style="display:none;"' : false); ?> id="<?php echo $tag[$i_n].'_'.$dimension['id_actividad'].'-'.$dimension['id_dimension'].'_'.$estudiante['id_asignacion'].substr($estudiante['correo'],0,-9); ?>">
                 <p>
                   <?php echo $describe_nivel; ?>
                 </p>
@@ -186,7 +191,7 @@ if ( isset($_SESSION['aes_username']) ) {
             </div>
             <div style="margin-bottom:30px;">
               <label>Comentario a <?php echo $estudiante['nombre']; ?>:</label>
-              <textarea class="form-control" rows="3" placeholder="Comentario de retroalimentación al estudiante" id="comentario_<?php echo $dimension['id_actividad'].'-'.$dimension['id_dimension'].'_'.substr($estudiante['correo'],0,-9); ?>"></textarea>
+              <textarea class="form-control" rows="3" placeholder="Comentario de retroalimentación al estudiante" id="comentario_<?php echo $dimension['id_actividad'].'-'.$dimension['id_dimension'].'_'.$estudiante['id_asignacion'].substr($estudiante['correo'],0,-9); ?>"></textarea>
             </div>
           <?php } // foreach ($asignaciones as $estudiante) ends
             } // else $dimension['id_actividad'] ends ?>
@@ -194,7 +199,7 @@ if ( isset($_SESSION['aes_username']) ) {
           <?php } // foreach ($dimensiones as $dimension) ends  ?>
           </div>
           <div class="box-footer text-center">
-            <button class="btn btn-primary" id="siguiente" onclick="saveNext(<?php echo $i; ?>)"><i class="fa fa-save"></i> Guardar Actividad</button>
+            <button class="btn btn-primary" id="siguiente" onclick="saveNext(<?php echo $i.','.$actividad['id_actividad']; ?>)"><i class="fa fa-save"></i> Guardar Actividad</button>
           </div>
           <!-- /.box-footer -->
         </div>

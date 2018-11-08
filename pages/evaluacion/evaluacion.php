@@ -4,8 +4,9 @@
 session_start();
 $AppNombre = 'AES';
 
-$id_evento = $_GET['evento'];
-$id_plan = $_GET['plan'];
+$id_evento = $_GET['vt'];
+$id_plan = $_GET['pl'];
+$id_asignacion = $_GET['sg'];
 
 // Required and Includes
 require_once('../../resources/pluginimporter.php');
@@ -60,6 +61,7 @@ require_once('../../resources/pluginimporter.php');
 <body class="hold-transition skin-blue sidebar-mini">
 <?php echo '<div id="id_plan" style="display:none;">'.$id_plan.'</div>'; ?>
 <?php echo '<div id="id_evento" style="display:none;">'.$id_evento.'</div>'; ?>
+<?php echo '<div id="id_asignacion" style="display:none;">'.$id_asignacion.'</div>'; ?>
 <div class="wrapper">
 
   <?php
@@ -166,6 +168,27 @@ require_once('../../resources/pluginimporter.php');
             </div>
             <!-- /.box-header -->
             <div class="box-body" id="acts">
+
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+  			</div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-success collapsed-box" id="envios_box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Enviado Previamente</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" id="envios_box_button"><i class="fa fa-plus"></i>
+                </button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body" id="envios_box_body">
 
             </div>
             <!-- /.box-body -->
